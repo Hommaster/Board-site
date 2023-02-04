@@ -3,5 +3,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index, name='main')
+    path('<int:rubric_id>/', by_rubric, name="by_rubric"),
+    path('', index, name="main")
 ]

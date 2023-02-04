@@ -1,0 +1,10 @@
+def all_objects(model):
+    return model.objects.all()
+
+
+def order_objects(model, *args):
+    return model.objects.order_by(args)
+
+
+def filter_objects(model, **kwargs):
+    return model.objects.filter(kwargs)

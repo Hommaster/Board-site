@@ -4,10 +4,21 @@
 {% block content %}
 <h2>{{ current_rubric.name }}</h2>
 {% for bb in bbs %}
-        <div>
-            <h2>{{ bb.title }}</h2>
-            <p>{{ bb.content }}</p>
-            <p>{{bb.published}}</p>
+    <div class="content-container">
+        <div class="content-name">
+            <h2>{{bb.title}}</h2>
         </div>
-    {% endfor %}
+
+        <div class="content">
+            <p>{{bb.content}}</p>
+            <p>${{bb.price}}</p>
+            <br>
+            <h6>{{bb.published}}</h6>
+            <div class="content-footer">
+                <a href="{{ bb.get_absolute_url }}">
+                     <input type="submit" value="Подробнее">
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

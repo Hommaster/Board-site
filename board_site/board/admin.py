@@ -13,6 +13,10 @@ class BbAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+
 admin.site.register(Bb, BbAdmin)
 # admin.site.register()
 admin.site.register(Rubric)

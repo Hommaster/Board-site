@@ -1,12 +1,27 @@
 {% extends 'layout/basic.html' %}
+{% load static %}
 {% block content %}
     {% for bb in bbs %}
-    <div>
-        <h2>{{bb.title}}</h2>
-        <p>{{bb.content}}</p>
-        <p>${{bb.price}}</p>
-        <br>
-        <h6>{{bb.published}}</h6>
+    <div class="content-container">
+        <div class="content-name">
+            <h2>{{bb.title}}</h2>
+        </div>
+
+        <div class="content">
+            <div class="photo">
+                <img src="{{bb.photo.url}}" alt=" Sorry...Image cannot load...">
+            </div>
+
+            <p>{{ bb.content }}</p>
+            <p>${{ bb.price }}</p>
+            <br>
+            <h6>{{ bb.published }}</h6>
+            <div class="content-footer">
+                <a href="{{ bb.get_absolute_url }}">
+                     <input type="submit" value="Подробнее">
+                </a>
+            </div>
+        </div>
     </div>
     {% endfor %}
 {% endblock %}

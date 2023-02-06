@@ -1,0 +1,18 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %} <h1>{{bb.title}}</h1> {% endblock %}
+
+{% block content %}
+<p>{{bb.rubric.name}}</p>
+<div class="about">
+    <h2>{{bb.title}}</h2>
+    <p>Цена: ${{bb.price}}</p>
+    <div class="contentic">
+        <p>Описание:</p>
+        <p>{{bb.content}}</p>
+    </div>
+</div>
+
+
+
+{% endblock %}

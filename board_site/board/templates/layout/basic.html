@@ -1,16 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'board/css/style.css' %}">
 </head>
 <body>
-    <header> Объявления </header>
+    <header> <h1>srufar Объявления</h1> </header>
     <nav>
         <a href="{% url 'main' %}">Главная</a>
         <a href="{% url 'add'%}">Создать объявление</a>
+        <h4>Категории</h4>
         {% for rubric in rubrics %}
-        <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>
+        <a href="{{ rubric.get_absolute_url }}">{{ rubric.name }}</a>
         {% endfor %}
     </nav>
     <section>

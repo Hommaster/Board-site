@@ -1,32 +1,21 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 
 from board.forms import BbForm
 from board.models import *
 from board.service import *
 
 
-def index(request):
-    bbs = get_all_objects(Bb)
-    rubrics = get_all_objects(Rubric)
-    context = {
-        'bbs': bbs,
-        'rubrics': rubrics,
-    }
-    return render(request, 'board/main.html', context=context)
+class MainListView(ListView):
+    model = Bb
+    context_object_name = "bbs"
+    template_name = "board/main.html"
 
-
-def by_rubric(request, rubric_id):
-    bbs = Bb.objects.filter(rubric=rubric_id)
-    rubrics = get_all_objects(Rubric)
-    current_rubric = Rubric.objects.filter(pk=rubric_id)
-    context = {
-        'bbs': bbs,
-        "rubrics": rubrics,
-        "current_rubric": current_rubric,
-    }
-    return render(request, 'board/by_rubric.html', context=context)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rubrics'] = get_all_objects(Rubric)
+        return context
 
 
 class BbCreateView(CreateView):
@@ -37,4 +26,33 @@ class BbCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rubrics'] = get_all_objects(Rubric)
+        return context
+
+
+def content(request):
+    return render(request, "board/bb_deteil.html")
+
+
+class ContentDetailView(DetailView):
+    model = Bb
+    template_name = 'board/bb_deteil.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rubrics'] = get_all_objects(Rubric)
+        return context
+
+
+class ByRubricListView(ListView):
+    model = Bb
+    context_object_name = 'bbs'
+    template_name = "board/main.html"
+
+    def get_queryset(self):
+        return Bb.objects.filter(rubric=self.kwargs['rubric_id'])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rubrics'] = get_all_objects(Rubric)
+        context['current_rubric'] = Rubric.objects.get(pk=self.kwargs['rubric_id'])
         return context

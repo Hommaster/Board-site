@@ -1,17 +1,28 @@
 {% extends 'layout/basic.html' %}
 
-{% block title %} <h1>{{bb.title}}</h1> {% endblock %}
-
+{% block title %} Страница с объявлением {% endblock %}
+<!-- !!!!!!!!!!!!!!!!!!!!!!bb это лист объектов, которые передала нам форма, мы его имя не меняли!!!!!!!!!!!!!!!!!!!!!-->
 {% block content %}
-<p>{{bb.rubric.name}}</p>
-<div class="about">
-    <h2>{{bb.title}}</h2>
-    <p>Цена: ${{bb.price}}</p>
-    <div class="contentic">
-        <p>Описание:</p>
-        <p>{{bb.content}}</p>
+<div class="detail-content">
+    <div class="detail-href">
+        <h3>Категория/ <a href="{{bb.rubric.get_absolute_url}}">{{bb.rubric.name}}</a></h3>
     </div>
+
+
+    <div class="about">
+        <img src="{{ bb.photo.url }}" alt=" Sorry...Image cannot load...">
+        <h2>{{bb.title}}</h2><br>
+        <h2>Цена: ${{bb.price}}</h2>
+        <h4>Описание:</h4>
+        <div class="contentic">
+            <p>{{bb.content}}</p>
+        </div>
+    </div>
+    <a href="{{ bb.get_absolute_update_url }}">
+        <input type="submit" value="Изменить">
+    </a>
 </div>
+
 
 
 

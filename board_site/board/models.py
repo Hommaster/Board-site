@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Bb(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название')
-    photo = models.ImageField(upload_to="photos/Y%/m%/d%/", null=True, blank=True)
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", null=True, blank=True)
     slug = models.SlugField(max_length=50, verbose_name='URL', unique=True, null=True)
     content = models.TextField(null=True, blank=True, verbose_name="Описание")
     price = models.FloatField(null=True, blank=True, verbose_name="Цена")
@@ -16,6 +16,9 @@ class Bb(models.Model):
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.pk})
+
+    def get_absolute_update_url(self):
+        return reverse("update", kwargs={"pk": self.pk})
 
     class Meta:
         # Название модели во множественном числе
@@ -30,11 +33,13 @@ class Bb(models.Model):
 
 
 class Rubric(models.Model):
-    name = models.CharField(max_length=20, db_index=True, verbose_name='Название')
+    name = models.CharField(max_length=30, db_index=True, verbose_name='Название')
     # slug = models.SlugField(max_length=50, verbose_name='URL', unique=True, null=True)
 
     def get_absolute_url(self):
         return reverse('by_rubric', kwargs={'rubric_id': self.pk})
+
+
 
     def __str__(self):
         return self.name

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from board.forms import BbForm
 from board.models import *
@@ -55,4 +55,16 @@ class ByRubricListView(ListView):
         context = super().get_context_data(**kwargs)
         context['rubrics'] = get_all_objects(Rubric)
         context['current_rubric'] = Rubric.objects.get(pk=self.kwargs['rubric_id'])
+        return context
+
+
+class BbEditView(UpdateView):
+    model = Bb
+    form_class = BbForm
+    template_name = 'board/edit_form.html'
+    success_url = reverse_lazy("main")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rubrics'] = get_all_objects(Rubric)
         return context

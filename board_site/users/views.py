@@ -1,3 +1,14 @@
+from django.contrib.auth import logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from users.forms import RegisterUserForm
+from board.models import *
+from board.service import *
+
+
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = "board/register_user.html"

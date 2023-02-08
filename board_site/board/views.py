@@ -7,6 +7,7 @@ from board.service import *
 
 
 class MainListView(ListView):
+    paginate_by = 20
     model = Bb
     context_object_name = "bbs"
     template_name = "board/main.html"
@@ -28,10 +29,6 @@ class BbCreateView(CreateView):
         return context
 
 
-def content(request):
-    return render(request, "board/bb_deteil.html")
-
-
 class ContentDetailView(DetailView):
     model = Bb
     template_name = 'board/bb_deteil.html'
@@ -44,6 +41,7 @@ class ContentDetailView(DetailView):
 
 class ByRubricListView(ListView):
     model = Bb
+    paginate_by = 20
     context_object_name = 'bbs'
     template_name = "board/main.html"
 

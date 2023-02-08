@@ -5,6 +5,7 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans&family=Sassy+Frass&display=swap" rel="stylesheet">
@@ -22,7 +23,6 @@
             </h1>
         </div>
         <div class="account">
-            <h1>
                 {% if not request.user.is_authenticated %}
                 <a href="{% url 'login' %}">
                     <span class="material-symbols-outlined">login</span>
@@ -37,8 +37,9 @@
                 <a href="{% url 'logout' %}">
                     <span class="material-symbols-outlined">logout</span>
                 </a>
+                |
+                <a href="{% url 'profile' user.id %}">{{user.username}}</a>
                 {% endif %}
-            </h1>
         </div>
 
     </header>
@@ -61,6 +62,9 @@
         {% block content %}
         {% endblock %}
     </section>
-
+    <section>
+        {% block paginator %}
+        {% endblock %}
+    </section>
 </body>
 </html>

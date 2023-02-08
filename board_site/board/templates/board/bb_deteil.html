@@ -10,6 +10,7 @@
 
 
     <div class="about">
+        {% if bb.photo %}
         <img src="{{ bb.photo.url }}" alt=" Sorry...Image cannot load...">
         <h2>{{bb.title}}</h2><br>
         <h2>Цена: ${{bb.price}}</h2>
@@ -17,6 +18,14 @@
         <div class="contentic">
             <p>{{bb.content}}</p>
         </div>
+        {% else %}
+        <h2>{{bb.title}}</h2><br>
+        <h2>Цена: ${{bb.price}}</h2>
+        <h4>Описание:</h4>
+        <div class="contentic">
+            <p>{{bb.content}}</p>
+        </div>
+        {% endif %}
     </div>
     <a href="{{ bb.get_absolute_update_url }}">
         <input type="submit" value="Изменить">

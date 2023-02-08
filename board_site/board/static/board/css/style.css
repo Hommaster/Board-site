@@ -1,17 +1,50 @@
 body {
     background: white;
+    font-family: 'Abril Fatface', cursive;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.paginator {
+    text-align: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin: 5px 0px 0px 0px;
+    font-family: 'Abril Fatface', cursive;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.account {
+    text-transform: uppercase;
+    text-align: right;
+    background: #44648c;
+
+
+}
+
+.account a{
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}
+
+.account a:hover{
+    color: white;
 }
 
 header h1 {
-    font-family: 'Abril Fatface', cursive;
-    font-family: 'Josefin Sans', sans-serif;
-
     font-size: 40pt;
     text-transform: uppercase;
+    text-align: center;
+    background: #44648c;
+}
+
+
+.header a{
+    font-size: 20pt;
+    text-transform: uppercase;
+    text-decoration: none;
     text-align: center;
     background: #44648c;
 }
@@ -137,6 +170,7 @@ h4 {
     float: none;
     display: flex;
     flex-wrap: wrap;
+
 }
 
 
@@ -150,4 +184,9 @@ h4 {
     display: block;
     flex-wrap: wrap;
     overflow: hidden;
+}
+
+.form_prof_new {
+    background: #44648c;
+    border-radius: 8px;
 }

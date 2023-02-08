@@ -10,7 +10,7 @@ class Bb(models.Model):
     price = models.FloatField(null=True, blank=True, verbose_name="Цена")
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Опубликовано:")
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
-
+    # user_creater = models.
     def __str__(self):
         return self.title
 
@@ -28,8 +28,10 @@ class Bb(models.Model):
         # Сортировка объектов
         ordering = ['-published']
 
-    # def get_absolute_url(self):
-    #     return
+    permissions = (
+        ('assign_task', 'Assign task'),
+    )
+    # разберался с разрешениямти
 
 
 class Rubric(models.Model):
@@ -38,8 +40,6 @@ class Rubric(models.Model):
 
     def get_absolute_url(self):
         return reverse('by_rubric', kwargs={'rubric_id': self.pk})
-
-
 
     def __str__(self):
         return self.name
@@ -51,3 +51,4 @@ class Rubric(models.Model):
         verbose_name = 'Рубрика'
         # Сортировка объектов
         ordering = ['name']
+

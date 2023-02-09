@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
@@ -34,3 +34,10 @@ class UserUpdateForm(forms.ModelForm):
         for item in need:
             if item not in self.cleaned_data["email"]:
                 ValidationError("Проверьте формат почты")
+
+
+class UserPasswordChangeForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ("password1", "password2")
+

@@ -5,6 +5,8 @@ users_urlpatterns = [
     path('accounts/register/', RegisterUser.as_view(), name="register"),
     path('accounts/logout/', logout_user, name="logout"),
     path('accounts/login/', LoginUser.as_view(), name="login"),
-    path('accounts/users/profile/<int:pk>/', UserProfile.as_view(), name="profile")
+    path('accounts/users/profile/<int:pk>/', UserProfile.as_view(), name="profile"),
+    path('accounts/password_change/', UserPasswordChange.as_view(), name='password_change'),
+
 ]
 

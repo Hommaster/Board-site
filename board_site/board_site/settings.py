@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     'users.apps.UsersConfig',
     'guardian',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'board_site.urls'
@@ -145,4 +147,17 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # default
     'guardian.backends.ObjectPermissionBackend',
 )
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, "django_site_cache"),
+        # 'LOCATION': '/var/tmp/django_cache',
+    }
+}
 

@@ -5,15 +5,6 @@ from guardian.admin import GuardedModelAdmin
 from board.models import *
 
 
-# Добавляет поисковое поле к админестратору
-# class BbAdmin(admin.ModelAdmin):
-
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-
-
-# admin.site.register(Bb, BbAdmin)
-
 @admin.register(Bb)
 class ProductAdmin(GuardedModelAdmin):
     # Последовательность имен полей, которые должны выводиться в списке записей
@@ -22,9 +13,12 @@ class ProductAdmin(GuardedModelAdmin):
     list_display_links = ('title', 'content')
     # Поля для фильтрации
     search_fields = ('title', 'content')
+    # prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Rubric)
+
+
 # all_models = apps.get_models()
 #
 # for model in all_models:

@@ -189,4 +189,6 @@ h4 {
 .form_prof_new {
     background: #44648c;
     border-radius: 8px;
+    padding: 10px;
+    max-width: max-content;
 }

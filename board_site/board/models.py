@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -10,7 +11,8 @@ class Bb(models.Model):
     price = models.FloatField(null=True, blank=True, verbose_name="Цена")
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Опубликовано:")
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
-    # user_creater = models.
+    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+
     def __str__(self):
         return self.title
 

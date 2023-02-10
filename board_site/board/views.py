@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.http import request
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
@@ -28,6 +30,11 @@ class BbCreateView(CreateView):
         context['rubrics'] = get_all_objects(Rubric)
         return context
 
+
+# @login_required(login_url="login")
+# def bbcreate(request):
+#     if request.method == "POST":
+#         form =
 
 class ContentDetailView(DetailView):
     model = Bb

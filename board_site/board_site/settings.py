@@ -41,8 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'board.apps.BoardConfig',
     'users.apps.UsersConfig',
+    'rest_framework',
     'guardian',
-    'debug_toolbar'
+    'debug_toolbar',
+    'd_r_f_main.apps.DRFMainConfig',
+    'd_r_f_users.apps.DRFUsersConfig',
+    'djoser',
+    'rest_framework.authtoken',
+    'captcha',
+
 ]
 
 MIDDLEWARE = [
@@ -83,7 +90,7 @@ WSGI_APPLICATION = 'board_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'main_site',
+        'NAME': 'book_site',
         'USER': 'matvey',
         'PASSWORD': '123123123_Matveyka2005',
         'HOST': 'localhost',
@@ -159,5 +166,17 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, "django_site_cache"),
         # 'LOCATION': '/var/tmp/django_cache',
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        "rest_framework.authentication.TokenAuthentication",  # разрешение аунтификации по токенам
+        "rest_framework.authentication.BasicAuthentication",  # аунтификация по сессиям
+        "rest_framework.authentication.SessionAuthentication",  # аунтификация по сессиям
+    ]
 }
 

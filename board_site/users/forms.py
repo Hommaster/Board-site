@@ -31,3 +31,17 @@ class UserUpdateForm(forms.ModelForm):
         if not self.cleaned_data["email"]:
             errors["email"] = ValidationError("Вы забыли ввесьти свой email")
 
+
+# class UserPasswordResetForm(forms.ModelForm):
+#     email = forms.EmailField()
+#
+#     class Meta:
+#         model = User
+#         fields = ("email", )
+#
+#     def clean(self):
+#         super().clean()
+#         errors = {}
+#
+#         if self.cleaned_data["email"] !=
+

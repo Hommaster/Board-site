@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import request
+from django.http import request, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
@@ -30,11 +30,10 @@ class BbCreateView(CreateView):
         context['rubrics'] = get_all_objects(Rubric)
         return context
 
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-# @login_required(login_url="login")
-# def bbcreate(request):
-#     if request.method == "POST":
-#         form =
 
 class ContentDetailView(DetailView):
     model = Bb
@@ -58,7 +57,13 @@ class ByRubricListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rubrics'] = get_all_objects(Rubric)
-        context['current_rubric'] = Rubric.objects.get(pk=self.kwargs['rubric_id'])
+
+        try:
+            current_rubric = Rubric.objects.get(pk=self.kwargs['rubric_id'])
+        except Bb.DoesNotExist:
+            raise Http404("Рубрики не чуществует")
+
+        context['current_rubric'] = current_rubric
         return context
 
 
@@ -72,5 +77,67 @@ class BbEditView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['rubrics'] = get_all_objects(Rubric)
         return context
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

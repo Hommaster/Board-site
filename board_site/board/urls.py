@@ -15,7 +15,8 @@ urlpatterns = [
     path('add/', cache_page(10)(BbCreateView.as_view()), name='add'),
     path('<int:rubric_id>/', ByRubricListView.as_view(), name="by_rubric"),
     path('', MainListView.as_view(), name="main"),
-] + users_urlpatterns + api_urlpatterns + users_api_urlpatterns
+] + users_urlpatterns
+# api_urlpatterns + users_api_urlpatterns
 
 
-
+# handler404 = PageNotFound404()

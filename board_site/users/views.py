@@ -1,9 +1,10 @@
 from django.contrib.auth import logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from users.forms import *
@@ -55,8 +56,19 @@ class UserPasswordChange(PasswordChangeView):
         return context
 
 
-# st 303-309, write a password resset classes ^_^
-class SendMassageAndPasswordResetView(PasswordResetView):
-    pass
+class AUserPasswordChange(UserPasswordChange):
+    template_name = "users/pas_ch.html"
+    success_url = reverse_lazy("password_done")
+    form_class = PasswordChangeForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
+def password_change_done(request):
+    return render(request, "password_change_done.html")

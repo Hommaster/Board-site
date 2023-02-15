@@ -15,9 +15,10 @@ class RegisterUser(CreateView):
     template_name = "users/register_user.html"
     success_url = reverse_lazy("main")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
 
 
 class LoginUser(AccessMixin, LoginView):
@@ -25,10 +26,8 @@ class LoginUser(AccessMixin, LoginView):
     template_name = "users/login_user.html"
     redirect_authenticated_user = reverse_lazy("main")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 def logout_user(request):
     logout(request)
@@ -41,9 +40,9 @@ class UserProfile(UpdateView):
     template_name = "users/profile.html"
     success_url = reverse_lazy("main")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 class UserPasswordChange(PasswordChangeView):
@@ -51,9 +50,9 @@ class UserPasswordChange(PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy("login")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 class AUserPasswordChange(UserPasswordChange):

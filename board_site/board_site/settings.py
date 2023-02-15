@@ -43,9 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rest_framework',
     'guardian',
-    'debug_toolbar',
-    'd_r_f_main.apps.DRFMainConfig',
-    'd_r_f_users.apps.DRFUsersConfig',
+    'debug_toolbar', 
     'djoser',
     'rest_framework.authtoken',
     'captcha',
@@ -86,13 +84,13 @@ WSGI_APPLICATION = 'board_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+    
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'book_site',
-        'USER': 'matvey',
-        'PASSWORD': '123123123_Matveyka2005',
+        'USER': 'tarkan',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '',
     }

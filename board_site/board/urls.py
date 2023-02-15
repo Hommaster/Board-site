@@ -1,10 +1,6 @@
-from django.urls import path
-
-from d_r_f_main.urls import api_urlpatterns
-# from d_r_f_main.views import BbViewSet
-from d_r_f_users.urls import users_api_urlpatterns
 from .views import *
 from users.urls import users_urlpatterns
+from django.urls import path
 # !!!!!import cache_page for cache !!!!!!
 from django.views.decorators.cache import cache_page
 

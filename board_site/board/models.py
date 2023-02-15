@@ -14,7 +14,7 @@ class Bb(models.Model):
     # user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.title    
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.pk})

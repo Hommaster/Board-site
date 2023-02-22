@@ -34,6 +34,7 @@ class Search(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["serching"] = self.request.GET.get("serching")
+        context['rubrics'] = get_all_objects(Rubric)
         return context
     
     

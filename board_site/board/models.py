@@ -54,3 +54,7 @@ class Rubric(models.Model):
         # Сортировка объектов
         ordering = ['name']
 
+
+# NEW!!
+class Cart(models.Model):
+    product = models.ForeignKey("Bb", verbose_name="Cart", on_delete=models.CASCADE)

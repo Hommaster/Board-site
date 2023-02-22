@@ -8,6 +8,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from users.forms import *
+from board.service import *
+from board.models import *
 
 
 class RegisterUser(CreateView):
@@ -17,9 +19,9 @@ class RegisterUser(CreateView):
 
     def form_valid(self, form):
         form.save()
+        cart_create()
         return super().form_valid(form)
     
-
 
 class LoginUser(AccessMixin, LoginView):
     authentication_form = AuthenticationForm
@@ -28,6 +30,7 @@ class LoginUser(AccessMixin, LoginView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
 
 def logout_user(request):
     logout(request)

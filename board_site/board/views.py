@@ -6,6 +6,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from board.forms import BbForm
 from board.models import *
 from board.service import *
+from board.utils import *
 
 
 class MainListView(ListView):
@@ -20,6 +21,23 @@ class MainListView(ListView):
         return context
 
 
+class Search(ListView):
+    template_name= "board/main.html"
+    paginate_by = 20
+    context_object_name = "bbs"
+    
+    # title__icontains -> нечувствительность к регистру
+    # serching -> имя поля из html страницы, точнее значение, которое ввел пользователь в форму )
+    def get_queryset(self):
+        return Bb.objects.filter(title__icontains=self.request.GET.get("serching"))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["serching"] = self.request.GET.get("serching")
+        return context
+    
+    
+    
 class BbCreateView(CreateView):
     template_name = "board/create.html"
     form_class = BbForm
@@ -81,26 +99,6 @@ class BbEditView(UpdateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

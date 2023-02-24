@@ -8,7 +8,7 @@ class BbForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["rubric"].empty_label = "Категория не выбрана"
-        # self.fields["user"] = kwargs.get("user")
+        
 
     # АВТОМАТИЧЕСКОЕ ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
 

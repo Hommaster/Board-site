@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     'users.apps.UsersConfig',
     'rest_framework',
-    'guardian',
     'debug_toolbar', 
     'djoser',
     'rest_framework.authtoken',

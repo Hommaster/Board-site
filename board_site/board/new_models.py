@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-
 class Bb(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название')
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", null=True, blank=True)
@@ -12,7 +11,7 @@ class Bb(models.Model):
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Опубликовано:")
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
     
-
+    
     def __str__(self):
         return self.title    
 
@@ -23,15 +22,11 @@ class Bb(models.Model):
         return reverse("update", kwargs={"pk": self.pk})
 
     class Meta:
-        # Название модели во множественном числе
+        # настройка для админ понели
         verbose_name_plural = 'Объявления'
-        # Название модели в единственном числе
         verbose_name = 'Объявление'
-        # Сортировка объектов
         ordering = ['-published']
-
-
-
+        
 class Rubric(models.Model):
     name = models.CharField(max_length=30, db_index=True, verbose_name='Название')
     # slug = models.SlugField(max_length=50, verbose_name='URL', unique=True, null=True)
@@ -43,15 +38,10 @@ class Rubric(models.Model):
         return self.name
 
     class Meta:
-        # Название модели во множественном числе
         verbose_name_plural = 'Рубрики'
-        # Название модели в единственном числе
         verbose_name = 'Рубрика'
-        # Сортировка объектов
         ordering = ['name']
-
-
-# NEW!!
+        
 class UserProfileUploads(models.Model):
-    suer = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_products = models.ForeignKey(Bb, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=moels.CASCADE)
+    current_uploud = models.ForeignKey(Bb, on_delete=models.CASCADE)

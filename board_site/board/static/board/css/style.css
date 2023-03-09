@@ -40,6 +40,10 @@ header h1 {
     background: #44648c;
 }
 
+.header-class {
+  border-radius: 9px;
+}
+
 
 .header a{
     font-size: 20pt;
@@ -51,7 +55,7 @@ header h1 {
 
 nav {
     font-size: 16pt;
-    width: 150px;
+    width: 170px;
     float: left;
 }
 
@@ -82,8 +86,8 @@ nav a {
 }
 
 nav a:hover {
-    color: white;
-        cursor: pointer;
+    color: #44648c;
+    cursor: pointer;
 }
 
 nav a:after{
@@ -179,8 +183,6 @@ h4 {
 .category {
     margin: 8px 0px 0px 0px;
     border-radius: 8px;
-    background: #44648c;
-    text-align: center;
     display: block;
     flex-wrap: wrap;
     overflow: hidden;
@@ -192,3 +194,5 @@ h4 {
     padding: 10px;
     max-width: max-content;
 }
+
+

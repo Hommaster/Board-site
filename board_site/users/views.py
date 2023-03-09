@@ -1,9 +1,9 @@
 from django.contrib.auth import logout
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
+
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
@@ -19,9 +19,13 @@ class RegisterUser(CreateView):
 
     def form_valid(self, form):
         form.save()
-        cart_create()
         return super().form_valid(form)
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["rubrics"] = get_all_objects(Rubric)
+        return context
+
 
 class LoginUser(AccessMixin, LoginView):
     authentication_form = AuthenticationForm
@@ -30,6 +34,11 @@ class LoginUser(AccessMixin, LoginView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["rubrics"] = get_all_objects(Rubric)
+        return context
 
 
 def logout_user(request):
@@ -42,7 +51,13 @@ class UserProfile(UpdateView):
     form_class = UserUpdateForm
     template_name = "users/profile.html"
     success_url = reverse_lazy("main")
-
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['user_products'] = UserProfileUploads.objects.filter(user=self.request.user)
+        data['rubrics'] = Rubric.objects.all()
+        return data 
+        
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)

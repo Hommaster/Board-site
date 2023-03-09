@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework.authtoken',
     'captcha',
-
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +58,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    
+    #"""TranzactIONs"""
+    "board.middleware.Process500"
 ]
 
 ROOT_URLCONF = 'board_site.urls'
@@ -92,6 +95,7 @@ DATABASES = {
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '',
+        'ATOMIC_REQUEST': True,
     }
 }
 

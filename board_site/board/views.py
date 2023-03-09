@@ -2,11 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from board.forms import BbForm
 from board.models import *
 from board.service import *
-from board.utils import *
 
 
 class MainListView(ListView):
@@ -36,9 +35,8 @@ class Search(ListView):
         context["serching"] = self.request.GET.get("serching")
         context['rubrics'] = get_all_objects(Rubric)
         return context
-    
-    
-    
+   
+
 class BbCreateView(CreateView):
     template_name = "board/create.html"
     form_class = BbForm
@@ -51,30 +49,9 @@ class BbCreateView(CreateView):
 
     def form_valid(self, form):
         form.save()
+        # !connect by celery
+        user_upload_connect(self.request.user, form.instance)
         return super().form_valid(form)
-
-        
-        
-class BbCreateView(CreateView):
-    template_name = "board/create.html"
-    form_class = BbForm
-    success_url = reverse_lazy("main")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['rubrics'] = get_all_objects(Rubric)
-        return context
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-    
-    # def post(self, request, *args, **kwargs):
-    #     object_post = request.POST
-    #     print(object_post)
-    
-#   ПОЛНОСТЬЮ ПЕРЕПИСАТЬ СОЗДАНИЕ, ВЫНЕСТИ ВСЕ НА СТРАНИЦУ И ПЕРЕПИСАТЬ СОЗДАНИЕ СТРАНИЦЫ
-
 
 
 class ContentDetailView(DetailView):
@@ -83,7 +60,7 @@ class ContentDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = get_all_objects(Rubric)
+        context['rubrics'] = get_all_objects(Rubric) 
         return context
 
 
@@ -102,7 +79,7 @@ class ByRubricListView(ListView):
 
         try:
             current_rubric = Rubric.objects.get(pk=self.kwargs['rubric_id'])
-        except Bb.DoesNotExist:
+        except Exception:
             raise Http404("Рубрики не чуществует")
 
         context['current_rubric'] = current_rubric
@@ -125,40 +102,14 @@ class BbEditView(UpdateView):
         return super().form_valid(form)
 
 
+class DeleteUploadView(DeleteView):
+    model = Bb
+    template_name = "board/delete.html"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["rubrics"] = Rubric.objects.all()
+        return context 
 
 
 

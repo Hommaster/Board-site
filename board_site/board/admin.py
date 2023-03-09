@@ -18,6 +18,7 @@ from board.models import *
 
 admin.site.register(Rubric)
 admin.site.register(Bb)
+admin.site.register(UserProfileUploads)
 
 # all_models = apps.get_models()
 #

@@ -1,4 +1,4 @@
-#!/home/matvey/PycharmProjects/BookProject/venv/bin/python
+#!/home/tarkan/Pyprojects/1_Proj/Board-site/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

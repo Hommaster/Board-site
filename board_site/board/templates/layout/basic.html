@@ -16,12 +16,14 @@
 <body>
 <!--    перевод - исследовать-->
     <header>
+      <div class="header-class">
         <div>
             <h1>
                 <span class="icon material-symbols-outlined">travel_explore</span>
                 explore
             </h1>
         </div>
+      
         <div class="account">
                 {% if not request.user.is_authenticated %}
                 <a href="{% url 'login' %}">
@@ -41,11 +43,13 @@
                 <a href="{% url 'profile' user.id %}">{{user.username}}</a>
                 {% endif %}
         </div>
-    </header>
+  
+    </div>
+  </header>
     
     <div>
         <form action="{% url 'search' %}" method="get">
-            <input type="search" name="serching" placeholder="Поиск товаров">
+            <input type="search" name="serching" placeholder="Поиск товаров" style="width: 90%; margin: 10px 0px 10px 25px">
             <button>Найти</button>
         </form>
     </div>

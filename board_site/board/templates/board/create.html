@@ -12,11 +12,12 @@
 
     <h1>Добавление объявлений</h1>
 
-    <form method="post" enctype="multipart/form-data">
+    
+      <form method="post" enctype="multipart/form-data" name="fun_form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Добавить">
-    </form>
+        {{form.as_p}}
+        <button type="submit">Добавить</button>
+      </form>
 
 {% endif %}
 {% endblock %}

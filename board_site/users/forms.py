@@ -21,15 +21,15 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ("username", "email")
 
-    def clean(self):
-        super().clean()
-        errors = {}
-
-        if not self.cleaned_data["username"]:
-            errors["username"] = ValidationError("Вы забыли ввести свое имя")
-
-        if not self.cleaned_data["email"]:
-            errors["email"] = ValidationError("Вы забыли ввесьти свой email")
+    # def clean(self):
+    #     super().clean()
+    #     errors = {}
+    #
+    #     if not self.cleaned_data["username"]:
+    #         errors["username"] = ValidationError("Вы забыли ввести свое имя")
+    #
+    #     if not self.cleaned_data["email"]:
+    #         errors["email"] = ValidationError("Вы забыли ввесьти свой email")
 
 
 # class UserPasswordResetForm(forms.ModelForm):

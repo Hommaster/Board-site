@@ -11,13 +11,12 @@ class Bb(models.Model):
     price = models.FloatField(null=True, blank=True, verbose_name="Цена")
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Опубликовано:")
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
-    
 
     def __str__(self):
         return self.title    
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"pk": self.pk})
+        return reverse("update", kwargs={"pk": self.pk})
 
     def get_absolute_update_url(self):
         return reverse("update", kwargs={"pk": self.pk})
@@ -29,7 +28,6 @@ class Bb(models.Model):
         verbose_name = 'Объявление'
         # Сортировка объектов
         ordering = ['-published']
-
 
 
 class Rubric(models.Model):
@@ -51,7 +49,7 @@ class Rubric(models.Model):
         ordering = ['name']
 
 
-# NEW!!
 class UserProfileUploads(models.Model):
-    suer = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_products = models.ForeignKey(Bb, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Bb, on_delete=models.CASCADE)
+

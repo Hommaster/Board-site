@@ -3,7 +3,6 @@ from users.urls import users_urlpatterns
 from django.urls import path
 # !!!!!import cache_page for cache !!!!!!
 from django.views.decorators.cache import cache_page
-from .api.board.urls import api_urlpatterns 
 
 
 urlpatterns = [
@@ -13,7 +12,7 @@ urlpatterns = [
     path('<int:rubric_id>/', ByRubricListView.as_view(), name="by_rubric"),
     path('', MainListView.as_view(), name="main"),
     path('search/', Search.as_view(), name="search"),
-] + users_urlpatterns + api_urlpatterns
+] + users_urlpatterns
 
 
 
